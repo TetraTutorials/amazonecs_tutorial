@@ -1,0 +1,20 @@
+########################################
+# Installing Jenkins on Ubuntu/Debian  #
+########################################
+
+Add Key:
+--------
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+
+Add Apt Repo:
+------------
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+Update:
+-------
+sudo apt-get update
+
+Install:
+-------
+sudo apt-get install jenkins
+
