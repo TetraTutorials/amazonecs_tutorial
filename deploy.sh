@@ -12,7 +12,7 @@ aws ecs register-task-definition --family tetra-app --cli-input-json file://tetr
 
 # Update the service with the new task definition and desired count
 REVISION=`aws ecs describe-task-definition --task-definition tetra-app | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
-DESIRED_COUNT=`aws ecs describe-services --services ${SERVICE_NAME} --cluster ${CLUSTER} --region ${REGION} | jq .failures[]`
+SERVICES=`aws ecs describe-services --services ${SERVICE_NAME} --cluster ${CLUSTER} --region ${REGION} | jq .failures[]`
 
 
 #Create or update service
