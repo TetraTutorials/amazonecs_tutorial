@@ -7,7 +7,9 @@ IMAGE_VERSION="v_"${BUILD_NUMBER}
 TASK_FAMILY="tetra-app"
 
 # Create a new task definition for this build
-sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" tetra-app.json > tetra-app-v_${BUILD_NUMBER}.json
+
+sed -e "s;%BUILD_NUMBER%;${BUILD_NUMBER};g" ../tetra-app.json > tetra-app-v_${BUILD_NUMBER}.json
+
 aws ecs register-task-definition --family tetra-app --cli-input-json file://tetra-app-v_${BUILD_NUMBER}.json
 
 # Update the service with the new task definition and desired count
@@ -27,4 +29,3 @@ else
   echo "entered new service"
   aws ecs create-service --service-name ${SERVICE_NAME} --desired-count 1 --task-definition ${TASK_FAMILY} --cluster ${CLUSTER} --region ${REGION}
 fi
-
